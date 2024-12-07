@@ -1,0 +1,5 @@
+/dados/
+/results/
+/api/trash
+.env
+__pycache__
