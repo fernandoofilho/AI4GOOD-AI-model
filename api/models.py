@@ -1,7 +1,6 @@
 from pydantic import BaseModel
 from typing import Any
-from sqlalchemy import Column, Integer, String, Float, ForeignKey
-from sqlalchemy.orm import relationship
+from sqlalchemy import Column, Integer, String, Float
 from db import Base
 
 class PayloadBody(BaseModel):
@@ -9,7 +8,6 @@ class PayloadBody(BaseModel):
 
 class ApiForecastHeader(Base):
     __tablename__ = "ForecastsHeader"
-
     id = Column(Integer, primary_key=True, index=True)
     modelrun = Column(String, nullable=False)
     name = Column(String, nullable=True)
@@ -25,6 +23,7 @@ class Units(Base):
     __tablename__ = "Units"
 
     id = Column(Integer, primary_key=True, index=True)
+    modelrun = Column(String, nullable=False)
     precipitation = Column(String, nullable=True)
     windspeed = Column(String, nullable=True)
     precipitation_probability = Column(String, nullable=True)
@@ -36,10 +35,8 @@ class Units(Base):
 
 class ApiForecastItem(Base):
     __tablename__ = "Forecasts"
-
     id = Column(Integer, primary_key=True, index=True)
-    forecastHeader_id = Column(Integer, ForeignKey("ForecastsHeader.id"), nullable=False)
-    units_id = Column(Integer, ForeignKey("Units.id"), nullable=False)
+    modelrun = Column(String, nullable=False)
 
     date_forecast = Column(String, nullable=True)
     windspeed = Column(Float, nullable=True)
@@ -55,9 +52,3 @@ class ApiForecastItem(Base):
     relativehumidity = Column(Float, nullable=True)
     sealevelpressure = Column(Float, nullable=True)
     winddirection = Column(Float, nullable=True)
-
-    forecastHeader = relationship("ApiForecastHeader", back_populates="forecasts")
-    units = relationship("Units", back_populates="forecasts")
-
-ApiForecastHeader.forecasts = relationship("ApiForecastItem", back_populates="forecastHeader", cascade="all, delete-orphan")
-Units.forecasts = relationship("ApiForecastItem", back_populates="units", cascade="all, delete-orphan")
