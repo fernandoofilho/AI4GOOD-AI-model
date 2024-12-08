@@ -25,7 +25,7 @@ class ProcessManyStates:
                     item.date_forecast, "%Y-%m-%d %H:%M"
                 ).date()
 
-                if item.precipitation < 70:
+                if item.precipitation < 0:
                     days_without_rain += 1
                 else:
                     break
@@ -55,7 +55,7 @@ class ProcessManyStates:
                 result = model.predict(  
                     lat="0.5159170029240021",
                     lon="0.7610174486938237",
-                    data_pas=date,
+                    data_pas=item.date_forecast,
                     numero_dias_sem_chuva=numero_dias_sem_chuva,
                     precipitacao=item.precipitation,
                 )
@@ -71,7 +71,7 @@ class ProcessManyStates:
                 object_item = {
                     "result": serialized_result,
                     "local": "Manaus",
-                    "date": date
+                    "date": item.date_forecast
                 }
                 items_list.append(object_item)
         return items_list

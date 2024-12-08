@@ -24,7 +24,7 @@ def read_root():
 
 @app.get("/fireRisk/")
 async def inferir_todos(db: AsyncSession = Depends(get_db)):
-    data = await ProcessManyStates.get(date="2024-12-07 00:00", db_session=db)
+    data = await ProcessManyStates.get(date="2024-12-08 00:00", db_session=db)
     return Serializer.serialize_many(data)
 
 @app.get("/fireRisk/detail")
