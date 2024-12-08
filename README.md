@@ -74,3 +74,17 @@ Se você deseja contribuir com o projeto, fique à vontade para abrir issues e e
 ## Licença
 
 Livre
+
+
+# Executando a API 
+
+## Criar o banco de dados
+Caso não tenha o arquivo local.db no código, procure o script init_db.py e execute-o
+
+## Executar a API 
+utilize o seguinte comando para executar a api em modo de desenvolvimento: 
+
+```bash 
+uvicorn main:app --reload
+
+```
