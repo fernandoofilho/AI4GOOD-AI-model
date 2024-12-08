@@ -79,7 +79,7 @@ Livre
 # Executando a API 
 
 ## Criar o banco de dados
-Caso não tenha o arquivo local.db no código, procure o script init_db.py e execute-o
+Caso não tenha o arquivo local.db na pasta da api, procure o script init_db.py e execute-o
 
 ## Executar a API 
 utilize o seguinte comando para executar a api em modo de desenvolvimento: 
